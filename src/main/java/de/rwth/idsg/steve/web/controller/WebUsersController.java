@@ -55,6 +55,8 @@ public class WebUsersController {
     private static final String UPDATE_PATH = "/update";
     private static final String ADD_PATH = "/add";
     private static final String PASSWORD_PATH = "/password/{webUserPk}";
+    private static final String API_PASSWORD_PATH = "/api-password/{webUserPk}";
+
 
     // -------------------------------------------------------------------------
     // HTTP methods
@@ -138,6 +140,36 @@ public class WebUsersController {
         webUserService.updatePassword(webuserForm);
         return toOverview();
     }
+
+    @RequestMapping(value = API_PASSWORD_PATH, method = RequestMethod.GET)
+    public String apiPasswordChangeGet(@PathVariable("webUserPk") Integer webUserPk, Model model) {
+        WebUserForm webUserForm = new WebUserForm();
+        WebUserBaseForm webUserBaseForm = webUserService.getDetails(webUserPk);
+    
+        // Populate the form with existing user details
+        webUserForm.setWebUserPk(webUserBaseForm.getWebUserPk());
+        webUserForm.setWebUsername(webUserBaseForm.getWebUsername());
+        webUserForm.setAuthorities(webUserBaseForm.getAuthorities());
+        webUserForm.setEnabled(webUserBaseForm.getEnabled());
+    
+        // Add the form to the model
+        model.addAttribute("webuserForm", webUserForm);
+    
+        // Return the view name where the form will be displayed
+        return "data-man/webuserApiPassword";
+    }
+
+
+   @RequestMapping(params = "changeApiPassword", value = API_PASSWORD_PATH, method = RequestMethod.POST)
+    public String apiPasswordChange(@Valid @ModelAttribute("webuserForm") WebUserForm webuserForm, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "data-man/webuserApiPassword";
+        }
+
+        webUserService.changeApiPassword(webuserForm.getWebUserPk(), webuserForm.getApiPassword());
+        return toOverview();
+    }
+
 
     @RequestMapping(value = DELETE_ALL_PATH, method = RequestMethod.POST)
     public String delete(@PathVariable("webUserPk") Integer webUserPk) {

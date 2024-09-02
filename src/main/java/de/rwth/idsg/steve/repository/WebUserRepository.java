@@ -51,4 +51,9 @@ public interface WebUserRepository  {
     WebUserRecord loadUserByUsername(String username);
 
     Result<Record4<Integer, String, Boolean, JSON>> getOverview(WebUserQueryForm form);
+
+    void changeApiPassword(String username, String newApiPassword);
+
+    void changeApiPassword(Integer userPk, String newApiPassword);
+
 }

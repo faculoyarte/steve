@@ -209,6 +209,14 @@ public class WebUserService implements UserDetailsManager {
         webUserRepository.changePassword(form.getWebUserPk(), encoder.encode(form.getPassword()));
     }
 
+    public void changeApiPassword(String username, String newApiPassword) {
+        webUserRepository.changeApiPassword(username, encoder.encode(newApiPassword));
+    }
+
+    public void changeApiPassword(Integer userPk, String newApiPassword) {
+        webUserRepository.changeApiPassword(userPk, encoder.encode(newApiPassword));
+    }
+
     public List<WebUserOverview> getOverview(WebUserQueryForm form) {
         return webUserRepository.getOverview(form)
                 .map(r -> WebUserOverview.builder()

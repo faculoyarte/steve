@@ -59,7 +59,7 @@ public class Issue1219 {
 
     private static final String url = "jdbc:mysql://localhost:3306/stevedb";
     private static final String userName = "steve";
-    private static final String password = "changeme";
+    private static final String password = "Yoshi";
 
     private final DSLContext ctx;
 
