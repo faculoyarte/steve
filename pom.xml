@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.rwth.idsg</groupId>
@@ -46,7 +47,8 @@
         <jackson.version>2.17.2</jackson.version>
         <plugin.license-maven.version>4.5</plugin.license-maven.version>
 
-        <!-- In Mysql: schema == database (http://dev.mysql.com/doc/refman/5.6/en/glossary.html#glos_schema) -->
+        <!-- In Mysql: schema == database
+        (http://dev.mysql.com/doc/refman/5.6/en/glossary.html#glos_schema) -->
         <jdbcUrl>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</jdbcUrl>
     </properties>
 
@@ -115,7 +117,7 @@
                 <version>${plugin.license-maven.version}</version>
                 <configuration>
                     <header>LICENSE-HEADER.txt</header>
-                    <properties/>
+                    <properties />
                     <excludes>
                         <exclude>**/*.txt</exclude>
                         <exclude>**/*.md</exclude>
@@ -420,7 +422,7 @@
                         <database>
                             <name>org.jooq.meta.mysql.MySQLDatabase</name>
                             <includes>.*</includes>
-                            <excludes/>
+                            <excludes />
                             <inputSchema>${db.schema}</inputSchema>
                             <unsignedTypes>false</unsignedTypes>
 
@@ -432,7 +434,8 @@
                                 </forcedType>
                                 <forcedType>
                                     <name>BOOLEAN</name>
-                                    <includeExpression>.*\.OCPP_TAG_ACTIVITY\.(IN_TRANSACTION|BLOCKED)</includeExpression>
+                                    <includeExpression>
+                                        .*\.OCPP_TAG_ACTIVITY\.(IN_TRANSACTION|BLOCKED)</includeExpression>
                                 </forcedType>
                                 <forcedType>
                                     <name>JSON</name>
@@ -454,7 +457,8 @@
                         </database>
                         <generate>
                             <fluentSetters>true</fluentSetters>
-                            <!-- https://www.jooq.org/doc/3.14/manual/code-generation/codegen-advanced/codegen-config-generate/codegen-generate-java-time-types/
+                            <!--
+                            https://www.jooq.org/doc/3.14/manual/code-generation/codegen-advanced/codegen-config-generate/codegen-generate-java-time-types/
                                  JOOQ switching to java.time data types messes up our converters since we use JodaTime.
                                  Until we as a project completely switch to java.time, I am disabling it. -->
                             <javaTimeTypes>false</javaTimeTypes>
@@ -621,7 +625,8 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <exclusions>
-                <!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/overview.html#overview-not-using-commons-logging -->
+                <!--
+                http://docs.spring.io/spring/docs/current/spring-framework-reference/html/overview.html#overview-not-using-commons-logging -->
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
@@ -722,11 +727,11 @@
             <artifactId>jetty-ee10-apache-jsp</artifactId>
             <version>${jetty.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.eclipse.jetty</groupId>-->
-<!--            <artifactId>apache-jstl</artifactId>-->
-<!--            <version>${jetty.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.eclipse.jetty</groupId>-->
+        <!--            <artifactId>apache-jstl</artifactId>-->
+        <!--            <version>${jetty.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-rewrite</artifactId>
@@ -753,6 +758,22 @@
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
             <version>${jooq.version}</version>
+        </dependency>
+
+        <!-- <dependency>
+    <groupId>io.swagger.core.v3</groupId>
+    <artifactId>swagger-annotations</artifactId>
+    <version>2.1.10</version>
+</dependency> -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.6.11</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
         </dependency>
 
         <!-- Test -->
